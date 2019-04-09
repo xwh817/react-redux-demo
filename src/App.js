@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from "react-redux"
+import {add, subtract, addTask, removeTask} from "./redux/actions"
 
 /**
  * create-react-app react-demo
@@ -51,11 +52,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    add: () => {
-      dispatch({
+    add: () => dispatch({
         type: 'add',
-      });
-    },
+      })
+    ,
     subtract: () => {
       dispatch({
         type: 'subtract'
@@ -81,5 +81,11 @@ const mapDispatchToProps = (dispatch) => {
  * mapStateToProps：store中的state和当前页面props的映射
  * mapDispatchToProps：store中的dispatch和当前页面事件关联
  */
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+// 直接定义的写法：
+//export default connect(mapStateToProps, mapDispatchToProps)(App);
+
+// 将action进行抽取后的写法：
+export default connect(
+  mapStateToProps, 
+  {add, subtract, addTask, removeTask})(App);
 //export default App;
